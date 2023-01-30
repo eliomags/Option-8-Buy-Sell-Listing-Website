@@ -33,12 +33,15 @@
 2. Item
 3. Seller
 4. Admin
+5. User_Favorites
 
 ## Relationships:
 
 1. User to Item (Many-to-Many): A user can have many favourite items and an item can have multiple users who have favourited it.
 2. User to Seller (Many-to-One): A user can send messages to multiple sellers, but each seller only receives messages from one user.
 3. Admin to Item (One-to-Many): An admin can post multiple items for sale, but each item is posted by only one admin.
+4. User to User_Favorites (One-to-Many): A user can have many favorite items, but each favorite item is associated with only one user.
+5. User_Favorites to Item (Many-to-One): An item can be favorited by multiple users, but each favorite item is associated with only one item.
 
 ## Attributes:
 
@@ -46,3 +49,38 @@
 2. Item: name, price, featured, sold (bool)
 3. Seller: name, email, password, listed items (FK to Item)
 4. Admin: name, email, password, posted items (FK to Item)
+5. User_Favorites: favorited items (FK to Item), user (FK to User)
+
+## User table:
+
+| user_id | name     | email                | password |
+| ------- | -------- | -------------------- | -------- |
+| 1       | John Doe | john.doe@example.com | abc123   |
+| 2       | Jane Doe | jane.doe@example.com | xyz456   |
+
+## Item table:
+
+| item_id | name      | price   | featured | sold    | seller_id |
+| ------- | --------- | ------- | -------- | ------- | --------- |
+| 1       | Red Shoes | 50.0    | True     | False 2 |
+| 2       | Blue Car  | 25000.0 | False    | False 3 |
+
+## Seller table:
+
+| seller_id | name          | email                     | password |
+| --------- | ------------- | ------------------------- | -------- |
+| 2         | Sarah Johnson | sarah.johnson@example.com | def789   |
+| 3         | Michael Smith | michael.smith@example.com | ghi101   |
+
+## Admin table:
+
+| admin_id | name      | email                 | password |
+| -------- | --------- | --------------------- | -------- |
+| 1        | David Lee | david.lee@example.com | jkl112   |
+
+## User_Favourites table:
+
+| user_id | item_id |
+| ------- | ------- |
+| 1       | 1       |
+| 2       | 2       |
